@@ -1,0 +1,19 @@
+# LiveBall robots.txt
+# https://liveballs.live/
+
+User-agent: *
+Allow: /
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Block any admin or private directories (if they exist)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /.git/
+
+# Sitemap location
+Sitemap: https://liveballs.live/sitemap.xml
+
+# Host preference
+Host: https://liveballs.live

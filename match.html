@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Watch live sports streaming on SportsPulse - Your ultimate destination for live matches.">
+    <title>Live Match Stream - SportsPulse</title>
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Stream Page Specific Styles */
+        .stream-page-container {
+            padding: var(--spacing-md);
+            margin-top: 100px;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: var(--spacing-md);
+            padding: var(--spacing-sm) var(--spacing-md);
+            color: var(--color-text-secondary);
+            font-weight: 500;
+            cursor: pointer;
+            transition: color var(--transition-fast);
+            text-decoration: none;
+            border-radius: var(--radius-sm);
+        }
+
+        .back-button:hover {
+            color: var(--color-accent-blue);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .live-stream-container {
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            /* 16:9 Aspect Ratio */
+            background: #000;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .stream-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: var(--color-text-secondary);
+        }
+
+        .stream-placeholder-icon {
+            font-size: 4rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        @media (max-width: 768px) {
+            .stream-page-container {
+                padding: var(--spacing-sm);
+                margin-top: 70px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER & NAVIGATION -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="index.html" class="logo">
+                    <img src="assets/logo.svg" alt="SportsPulse Logo" class="logo-img">
+                    SportsPulse
+                </a>
+
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html#live" class="nav-link active">Live</a></li>
+                    <li><a href="index.html#tennis" class="nav-link">Tennis Training</a></li>
+                    <li><a href="index.html#analytics" class="nav-link">Analytics</a></li>
+                    <li><a href="index.html#fantasy" class="nav-link">Fantasy</a></li>
+                    <li><a href="index.html" class="btn btn-primary">Watch Now</a></li>
+                </ul>
+
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- STREAM PAGE CONTAINER -->
+    <div class="stream-page-container">
+        <a href="index.html#live" class="back-button">
+            ← Back to Live Matches
+        </a>
+
+        <div class="live-stream-container">
+            <div class="iframe-container" id="streamContainer">
+                <!-- Iframe will be inserted here -->
+                <div class="stream-placeholder">
+                    <div class="stream-placeholder-icon">📺</div>
+                    <h3>Live Stream</h3>
+                    <p>The match stream will appear here</p>
+                    <p style="font-size: 0.875rem; margin-top: var(--spacing-md);">
+                        Add your stream URL in the matches object below
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get match ID from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const matchId = urlParams.get('id');
+
+        // Match stream URLs - ADD YOUR STREAM URLs HERE
+        const matchStreams = {
+            '1': '', // Lecce vs Torino - Add stream URL here
+            '2': '', // Crystal Palace vs Manchester United
+            '3': '', // Hibernian vs Celtic
+            '4': '', // Bohemians 1905 vs Greenhouse
+            '5': '', // Saint-Cyr Collonges vs Rhone-Vallee
+            '6': '', // MJEP Cormontreuil vs Chantilly
+            '7': '', // Avranches vs Aubervilliers
+            '8': '', // Thailand U-17 vs Kuwait U-17
+            '9': '', // Gabala vs Araz-Nakhchivan
+            '10': '' // Jan vs Hansa
+        };
+
+        // Load stream if match ID exists
+        if (matchId && matchStreams.hasOwnProperty(matchId)) {
+            const streamUrl = matchStreams[matchId];
+            const streamContainer = document.getElementById('streamContainer');
+
+            if (streamUrl) {
+                // If stream URL exists, load the iframe
+                streamContainer.innerHTML = `<iframe src="${streamUrl}" allowfullscreen allow="autoplay; encrypted-media; picture-in-picture"></iframe>`;
+            }
+            // If no stream URL, the placeholder will show
+        } else {
+            // Redirect to home only if match ID is invalid
+            window.location.href = 'index.html#live';
+        }
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+
+</html>

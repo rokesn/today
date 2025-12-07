@@ -1,0 +1,14 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="logo_gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#00d4ff"/>
+<stop offset="100%" stop-color="#7b2cbf"/>
+</linearGradient>
+<filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+<feGaussianBlur stdDeviation="10" result="blur"/>
+<feComposite in="SourceGraphic" in2="blur" operator="over"/>
+</filter>
+</defs>
+<rect x="32" y="32" width="448" height="448" rx="120" fill="url(#logo_gradient)" />
+<path d="M280 40L200 240H310L230 470L360 200H250L280 40Z" fill="white" stroke="none" transform="translate(-20, 10) scale(1.1)"/>
+</svg>
